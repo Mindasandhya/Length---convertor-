@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Length Converter</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            background-color: black;
+        }
+
+        .container {
+            padding: 10px 25px;
+            border-radius: 25px;
+            width: 490px;
+            background-color:pink;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 0.5em;
+            font-family: sans-serif;
+        }
+
+        select, input, button {
+            width: 100%;
+            height: 40px;
+            font-size: 1.2em;
+            margin: 0.5em 0;
+            outline: none;
+            border: none;
+            padding: 0 1em;
+        }
+
+        select {
+            background-color:aliceblue;
+            cursor: pointer;
+        }
+
+        input {
+            width: 450px;
+            display: flex;
+        }
+
+        button {
+            cursor: pointer;
+            height: 50%;
+            font-size: 1.5em;
+            background-color:blue;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .results {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Length Converter</h1>
+        <input type="text" id="input" placeholder="Enter value">
+        <br>
+        From: <select id="from">
+            <option value="cm">centimeter(cm)</option>
+            <option value="m">meter(m)</option>
+            <option value="dm">decimeter(dm)</option>
+            <option value="dam">dekameter(dam)</option>
+            <option value="hm">hectameter(hm)</option>
+            <option value="ft">foot(ft)</option>
+            <option value="in">inch(in)</option>
+            <option value="km">kilometer(km)</option>
+        </select>
+        To: <select id="to">
+            <option value="cm">centimeter(cm)</option>
+            <option value="m">meter(m)</option>
+            <option value="dm">decimeter(dm)</option>
+            <option value="dam">dekameter(dam)</option>
+            <option value="hm">hectameter(hm)</option>
+            <option value="ft">foot(ft)</option>
+            <option value="in">inch(in)</option>
+            <option value="km">kilometer(km)</option>
+        </select><br>
+        <button onclick="convert()">Convert</button>
+        <div id="results" class="results"></div>
+    </div>
+    <script>
+        const conversionFactors = {
+            cm: 1,
+            m: 100,
+            dm: 10,
+            dam: 0.1,
+            hm: 0.01,
+            ft: 30.48,
+            in: 2.54,
+            km: 0.00001
+        };
+
+        function convert() {
+            const input = parseFloat(document.getElementById("input").value);
+            const from = document.getElementById("from").value;
+            const to = document.getElementById("to").value;
+
+            if (isNaN(input)) {
+                alert("Please enter a valid number.");
+                return;
+            }
+
+            const inputInCm = input * conversionFactors[from];
+            const result = inputInCm / conversionFactors[to];
+
+            document.getElementById("results").textContent = `${input} ${from} = ${result.toFixed(4)} ${to}`;
+        }
+    </script>
+</body>
+
+</html>
